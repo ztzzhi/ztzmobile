@@ -5,7 +5,7 @@ import { changeTokenAction } from "../../store/actions/login"
 import { Button } from "antd"
 /*使用typescript开发react时候引入 *.module.less有所不同*/
 const style = require("./index.module.css").default
-import NotFound from "../NotFound"
+import NotFound from "@/pages/NotFound"
 
 const mutationState = (state: any) => state["login"]
 const mutationAciton = (dispatch: any) => {

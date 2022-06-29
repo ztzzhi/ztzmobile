@@ -14,4 +14,7 @@ declare module '*.module.less' {
   export default classes;
 }
 
-### 坑3
+### 坑3 配置别名@指向src目录
+1.修改craco.config.js 文件
+2.创建 path.tsconfig.json 文件 
+3.配置tsconfig.json 文件
