@@ -9,3 +9,4 @@
 .DS_Store
 fis-conf.js
 /public
+/src/reportWebVitals.ts
