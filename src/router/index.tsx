@@ -5,12 +5,18 @@ import { useRoutes, Navigate } from "react-router-dom"
 import Login from "../pages/Login"
 import NotFound from "../pages/NotFound"
 import NotPermission from "../pages/NotPermission"
+import Layout from "@/components/layout"
 
 // 页面路由
 
 export default function AppRouter() {
   const routers = useRoutes([
-    { path: "/", element: <Navigate to="/login" /> },
+    { path: "/", element: <Navigate to="/home" /> },
+    {
+      path: "home",
+      element: <Layout />,
+      children: [{ path: "login", element: <Login /> }]
+    },
     { path: "login", element: <Login /> },
     { path: "404", element: <NotFound /> },
     { path: "401", element: <NotPermission /> },
