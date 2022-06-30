@@ -2,8 +2,47 @@ import React from "react"
 //@ts-ignore
 import style from "./index.module.less"
 
+import { useDispatch, useSelector } from "react-redux"
+
+import { changeLanguageAction } from "@/store/actions/i18n"
+
+import { RootState } from "@/store"
+
+import { i18nType } from "@/store/reducers/i18n"
+
+import { Select } from "antd"
+
+import { useTranslation } from "react-i18next"
+
 const Header: React.FC = () => {
-  return <div className={style.headerText}>护理员一件事</div>
+  const { Option } = Select
+
+  const currentLanguage = useSelector<RootState, i18nType>(state => state.i18n)
+
+  const dispatch = useDispatch()
+
+  const { t } = useTranslation()
+  console.log(t, "ttt")
+
+  const handleChangeLanguage = (value: string) => {
+    dispatch(changeLanguageAction(value))
+  }
+  return (
+    <div className={style.headerText}>
+      {t("header.language")}
+      <div>护理员一件事</div>
+      <div>
+        <Select
+          size="small"
+          defaultValue={currentLanguage.language}
+          onChange={handleChangeLanguage}
+        >
+          <Option key="zh">中文</Option>
+          <Option key="en">英文</Option>
+        </Select>
+      </div>
+    </div>
+  )
 }
 
 export default Header

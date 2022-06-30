@@ -18,3 +18,20 @@ declare module '*.module.less' {
 1.修改craco.config.js 文件
 2.创建 path.tsconfig.json 文件 
 3.配置tsconfig.json 文件
+
+### 坑4 利用反向注入获取function的返回值类型
+一般用于获取store的所有state类型
+
+### 坑5 规范 useSelector中的类型
+const loginState = useSelector(state => state.login) //对象的类型为 "unknown"。
+改为
+const loginState = useSelector<RootState, loginType>(state => state.login)
+
+### 坑6 像window setTimeout 这种容易出现 eslint 处理 is not defined 的错误
+"globals": {
+    "document": true,
+    "localStorage": true,
+    "window": true,
+    "setTimeout": true,
+    "console": true,
+  }

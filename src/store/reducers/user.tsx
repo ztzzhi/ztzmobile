@@ -1,12 +1,13 @@
 import { LANGUAGE_CODE } from "../constant"
 
-export interface loginType {
+export interface userType {
   username: string
 }
 
-const initState = {
+const initState: userType = {
   username: "ztz"
 }
+
 export default function userReducer(preState = initState, action: any) {
   const { type, data } = action
   let newState

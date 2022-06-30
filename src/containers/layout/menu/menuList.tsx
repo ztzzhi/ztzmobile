@@ -60,27 +60,7 @@ const menuList = {
           title: "基础设置",
           key: "set",
           icon: "icon-jichushezhi",
-          path: "basic/set",
-          children: [
-            {
-              title: "题库管理",
-              key: "question",
-              icon: "icon-dati",
-              path: "exercise/question"
-            },
-            {
-              title: "录播管理",
-              key: "recorded",
-              icon: "icon-shipin",
-              path: "exercise/recorded"
-            },
-            {
-              title: "模拟试卷",
-              key: "test",
-              icon: "icon-monishijuan",
-              path: "exercise/test"
-            }
-          ]
+          path: "basic/set"
         },
         {
           title: "标签管理",
