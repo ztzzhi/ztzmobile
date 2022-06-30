@@ -93,4 +93,12 @@ const menuList = {
   ]
 }
 
+export interface menuItemType {
+  title: string
+  key?: string
+  icon?: string
+  path?: string
+  children?: menuItemType[]
+}
+
 export default menuList

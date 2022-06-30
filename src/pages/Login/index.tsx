@@ -3,9 +3,8 @@ import { useState } from "react"
 import { connect } from "react-redux"
 import { changeTokenAction } from "../../store/actions/login"
 import { Button } from "antd"
-/*使用typescript开发react时候引入 *.module.less有所不同*/
-const style = require("./index.module.css").default
-import NotFound from "@/pages/NotFound"
+//@ts-ignore
+import style from "./index.module.css"
 
 const mutationState = (state: any) => state["login"]
 const mutationAciton = (dispatch: any) => {
@@ -30,8 +29,6 @@ const Index = function (props: any) {
       <div onClick={() => setState(state + 1)}>{state}</div>
       <div>我是store中的token:{props.token}</div>
       <Button onClick={handleChangeToken}>点我更改token</Button>
-
-      <NotFound></NotFound>
     </>
   )
 }

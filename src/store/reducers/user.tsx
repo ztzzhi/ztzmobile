@@ -1,4 +1,9 @@
 import { LANGUAGE_CODE } from "../constant"
+
+export interface loginType {
+  username: string
+}
+
 const initState = {
   username: "ztz"
 }

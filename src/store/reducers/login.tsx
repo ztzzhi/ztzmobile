@@ -1,5 +1,9 @@
 import { TOKEN_CHANGE } from "../constant"
 
+export interface loginType {
+  token: string
+}
+
 const initState = {
   token: "xxx"
 }

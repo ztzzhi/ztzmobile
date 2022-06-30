@@ -1,28 +1,34 @@
 import React from "react"
 import { Menu } from "antd"
 import { Link } from "react-router-dom"
-import menuList from "./menuList"
+import menuList, { menuItemType } from "./menuList"
 import { createFromIconfontCN } from "@ant-design/icons"
 import { useLocation } from "react-router-dom"
+//@ts-ignore
 import style from "./index.module.less"
 
 const { SubMenu } = Menu
 
-export default function Index() {
-  let selectKey = useLocation().pathname.split("/")
-  let openKeys = useLocation().pathname.split("/").slice(2)
+const Index: React.FC = () => {
+  const selectKey = useLocation().pathname.split("/")
+  const openKeys = useLocation().pathname.split("/").slice(2)
   const IconFont = createFromIconfontCN({
     scriptUrl: "//at.alicdn.com/t/font_3135910_afa4enq3jwv.js"
   })
-  const createMenu = menus => {
+  const createMenu = (menus: menuItemType[]) => {
     return menus.map(menu => {
       if (!menu.children) {
         return (
           <Menu.Item
             key={menu.key}
-            icon={<IconFont type={menu.icon} style={{ marginRight: "6px" }} />}
+            icon={
+              <IconFont
+                type={menu.icon as string}
+                style={{ marginRight: "6px" }}
+              />
+            }
           >
-            <Link to={menu.path}>{menu.title}</Link>
+            <Link to={menu.path as string}>{menu.title}</Link>
           </Menu.Item>
         )
       } else {
@@ -30,7 +36,12 @@ export default function Index() {
           <SubMenu
             key={menu.key}
             title={menu.title}
-            icon={<IconFont type={menu.icon} style={{ marginRight: "6px" }} />}
+            icon={
+              <IconFont
+                type={menu.icon as string}
+                style={{ marginRight: "6px" }}
+              />
+            }
           >
             {createMenu(menu.children)}
           </SubMenu>
@@ -41,7 +52,7 @@ export default function Index() {
   return (
     <div className={style["left-nav"]}>
       <Menu
-        defaultSelectedKeys={"home"}
+        defaultSelectedKeys={["", "home"]}
         selectedKeys={selectKey}
         defaultOpenKeys={openKeys}
         mode="inline"
@@ -53,3 +64,5 @@ export default function Index() {
     </div>
   )
 }
+
+export default Index

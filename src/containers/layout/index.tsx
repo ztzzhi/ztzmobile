@@ -3,10 +3,11 @@ import HeaderSelf from "./header/header"
 import MenuSelf from "./menu/menu"
 import { Layout } from "antd"
 import { Outlet } from "react-router-dom"
+//@ts-ignore
 import style from "./index.module.less"
 
 const { Header, Sider, Content } = Layout
-function Index() {
+const Index: React.FC = () => {
   return (
     <div>
       <Layout className={style.admin}>
@@ -17,7 +18,7 @@ function Index() {
           <Sider>
             <MenuSelf></MenuSelf>
           </Sider>
-          <Content>
+          <Content className={style.mainContent}>
             <Outlet></Outlet>
           </Content>
         </Layout>

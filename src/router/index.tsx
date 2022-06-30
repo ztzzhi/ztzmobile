@@ -5,7 +5,7 @@ import { useRoutes, Navigate } from "react-router-dom"
 import Login from "../pages/Login"
 import NotFound from "../pages/NotFound"
 import NotPermission from "../pages/NotPermission"
-import Layout from "@/components/layout"
+import Layout from "@/containers/layout"
 
 // 页面路由
 
