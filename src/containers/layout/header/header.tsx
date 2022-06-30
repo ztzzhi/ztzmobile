@@ -22,8 +22,6 @@ const Header: React.FC = () => {
   const dispatch = useDispatch()
 
   const { t } = useTranslation()
-  console.log(t, "ttt")
-
   const handleChangeLanguage = (value: string) => {
     dispatch(changeLanguageAction(value))
   }
