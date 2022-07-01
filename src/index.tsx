@@ -10,13 +10,11 @@ import ProviderLanguage from "@/components/ProviderLanguage"
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ProviderLanguage>
-        <App />
-      </ProviderLanguage>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <ProviderLanguage>
+      <App />
+    </ProviderLanguage>
+  </Provider>
 )
 
 reportWebVitals()
