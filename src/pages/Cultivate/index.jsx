@@ -2,7 +2,11 @@ import React, { useState, useEffect, useRef } from "react"
 import { Card, Input, Button, Select, Form, Modal, message } from "antd"
 import Table from "../../components/TableNoSelection"
 import columns from "./columns"
-import { getCultivate, cultivateVerify, cultivateResetPasswd } from "../../api"
+import {
+  getCultivate,
+  cultivateVerify,
+  cultivateResetPasswd
+} from "../../api/member"
 import { ExclamationCircleOutlined } from "@ant-design/icons"
 
 const { Option } = Select

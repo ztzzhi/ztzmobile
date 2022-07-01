@@ -36,23 +36,21 @@ instance.interceptors.response.use(response => {
     return response.data
   } else if (response.data.code === 40003) {
     message.warning(`${response.data.message}，请重新登录`, 2)
-    //分发删除用户信息的action
   } else {
-    //提示消息
     message.error(`${response.data.message}`, 2)
     return
   }
 })
 
-export const getRequest = (url = "", data = {}, timeout = 5000) => {
+export const getRequest = (url = "", data = {}) => {
   if (qs.stringify(data)) {
     url += url.includes("?")
       ? "&" + qs.stringify(data)
       : "?" + qs.stringify(data)
   }
-  return instance.get(url, { timeout })
+  return instance.get(url)
 }
 
-export const postRequest = (url = "", data = {}, timeout = 5000) => {
-  return instance.post(url, data, { timeout })
+export const postRequest = (url = "", data = {}) => {
+  return instance.post(url, data)
 }
