@@ -1,5 +1,7 @@
 {
   "header": {
-    "language": "English"
+    "language": "English",
+    "logoText": "Government Backstage Management",
+    "nameOfTrainingInstitution": "Name Of Training Institution"
   }
 }

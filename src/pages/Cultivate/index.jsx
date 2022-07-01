@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react"
-import { Card, Input, Button, Select, Form, Modal, message } from "antd"
+import { Card, Input, Button, Select, Form, Modal, message, Space } from "antd"
 import Table from "../../components/TableNoSelection"
-import columns from "./columns"
+import useColumns from "./columns"
+
 import {
   getCultivate,
   cultivateVerify,
@@ -196,7 +197,11 @@ export default function Cultivate() {
     >
       <Table
         dataSource={list}
-        columns={columns({ showPassConfirm, showRefuseConfirm, resetPasswd })}
+        columns={useColumns({
+          showPassConfirm,
+          showRefuseConfirm,
+          resetPasswd
+        })}
         pagesize={getPageSize}
         loading={loading}
         total={total}

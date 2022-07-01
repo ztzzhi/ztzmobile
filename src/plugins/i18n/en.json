@@ -1,5 +1,7 @@
 {
   "header": {
-    "language": "中文"
+    "language": "中文",
+    "logoText": "政府后台管理",
+    "nameOfTrainingInstitution": "培训机构名称"
   }
 }

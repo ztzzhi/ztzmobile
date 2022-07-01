@@ -27,8 +27,7 @@ const Header: React.FC = () => {
   }
   return (
     <div className={style.headerText}>
-      {t("header.language")}
-      <div>护理员一件事</div>
+      <div>{t("header.logoText")}</div>
       <div>
         <Select
           size="small"
