@@ -1,13 +1,4 @@
-import {
-  Button,
-  Card,
-  Form,
-  Input,
-  InputNumber,
-  message,
-  Space,
-  Calendar
-} from "antd"
+import { Button, Card, Form, Input, InputNumber, message, Space } from "antd"
 import React from "react"
 import { UserOutlined } from "@ant-design/icons"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -27,7 +18,6 @@ export default function Index() {
   }
   return (
     <Card title="机构编辑" size="small">
-      <Calendar></Calendar>
       <Form
         labelCol={{ md: 4 }}
         wrapperCol={{ md: 8 }}
