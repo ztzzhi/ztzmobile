@@ -35,3 +35,9 @@ const loginState = useSelector<RootState, loginType>(state => state.login)
     "setTimeout": true,
     "console": true,
   }
+
+### 坑7 修改默认滚动条 自定义效果更佳
+考虑到原生滚动条的效果不佳 会有阴影 体验不是很好 所以采用自定义效果
+
+::-webkit-scrollbar
+::-webkit-scrollbar-thumb

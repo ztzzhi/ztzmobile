@@ -10,6 +10,10 @@ import style from "./index.module.less"
 const { SubMenu } = Menu
 
 const Index: React.FC = () => {
+  const handleClick = ({ domEvent }: any) => {
+    const documentTitle = domEvent!.target.innerText
+    document.title = documentTitle
+  }
   const selectKey = useLocation().pathname.split("/")
   const openKeys = useLocation().pathname.split("/").slice(2)
   const IconFont = createFromIconfontCN({
@@ -20,6 +24,7 @@ const Index: React.FC = () => {
       if (!menu.children) {
         return (
           <Menu.Item
+            className="customclass"
             key={menu.key}
             icon={
               <IconFont
@@ -52,12 +57,13 @@ const Index: React.FC = () => {
   return (
     <div className={style["left-nav"]}>
       <Menu
-        defaultSelectedKeys={["", "home"]}
+        defaultSelectedKeys={[""]}
         selectedKeys={selectKey}
         defaultOpenKeys={openKeys}
         mode="inline"
         theme="dark"
         className={style["left-nav-menu"]}
+        onClick={handleClick}
       >
         {createMenu(menuList.gv)}
       </Menu>
