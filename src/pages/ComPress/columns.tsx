@@ -142,7 +142,9 @@ export default function useColumns({
       width: 150,
       render: record => (
         <Space size={6} direction="vertical">
-          <Button onClick={() => handleEdit(record)}>编辑</Button>
+          <Button type="primary" onClick={() => handleEdit(record)}>
+            编辑
+          </Button>
           {record?.status === 1 ? (
             <>
               <Button
