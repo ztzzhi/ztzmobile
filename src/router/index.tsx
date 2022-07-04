@@ -10,6 +10,7 @@ import Home from "@/pages/Home"
 import Cultivate from "@/pages/Cultivate"
 import CultivateEdit from "@/pages/Cultivate/edit"
 import YangLao from "@/pages/YangLao/index"
+import ComPress from "@/pages/ComPress/index"
 
 // 页面路由
 
@@ -22,7 +23,8 @@ export default function AppRouter() {
         { path: "", element: <Home /> },
         { path: "cultivate", element: <Cultivate /> },
         { path: "cultivate/edit_:id", element: <CultivateEdit /> },
-        { path: "yanglao", element: <YangLao /> }
+        { path: "yanglao", element: <YangLao /> },
+        { path: "compress", element: <ComPress /> }
       ]
     },
     {

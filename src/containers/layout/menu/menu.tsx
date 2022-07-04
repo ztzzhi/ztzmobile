@@ -1,15 +1,14 @@
 import React from "react"
 import { Menu } from "antd"
-import { Link } from "react-router-dom"
 import menuList, { menuItemType } from "./menuList"
 import { createFromIconfontCN } from "@ant-design/icons"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
+import type { MenuProps } from "antd"
 //@ts-ignore
 import style from "./index.module.less"
 
-const { SubMenu } = Menu
-
 const Index: React.FC = () => {
+  const navigate = useNavigate()
   const handleClick = ({ domEvent }: any) => {
     const documentTitle = domEvent!.target.innerText
     document.title = documentTitle
@@ -19,41 +18,43 @@ const Index: React.FC = () => {
   const IconFont = createFromIconfontCN({
     scriptUrl: "//at.alicdn.com/t/font_3135910_afa4enq3jwv.js"
   })
-  const createMenu = (menus: menuItemType[]) => {
-    return menus.map(menu => {
-      if (!menu.children) {
-        return (
-          <Menu.Item
-            className="customclass"
-            key={menu.key}
-            icon={
-              <IconFont
-                type={menu.icon as string}
-                style={{ marginRight: "6px" }}
-              />
-            }
-          >
-            <Link to={menu.path as string}>{menu.title}</Link>
-          </Menu.Item>
-        )
+  interface IMenuItem extends menuItemType {
+    onClick?: (...set: any) => any
+  }
+
+  type IMenuProps = MenuProps["items"]
+
+  const handleMenuList = (menuList: menuItemType[]): IMenuProps => {
+    return menuList.map((item: IMenuItem) => {
+      if (item.children) {
+        return {
+          ...item,
+          children: handleMenuList(item.children),
+          icon: (
+            <IconFont
+              type={item.icon as string}
+              style={{ marginRight: "6px" }}
+            />
+          )
+        }
       } else {
-        return (
-          <SubMenu
-            key={menu.key}
-            title={menu.title}
-            icon={
-              <IconFont
-                type={menu.icon as string}
-                style={{ marginRight: "6px" }}
-              />
-            }
-          >
-            {createMenu(menu.children)}
-          </SubMenu>
-        )
+        return {
+          ...item,
+          onClick: () => {
+            item.path && navigate(item.path)
+          },
+          icon: (
+            <IconFont
+              type={item.icon as string}
+              style={{ marginRight: "6px" }}
+            />
+          )
+        }
       }
     })
   }
+  const menuListArr = handleMenuList(menuList.gv)
+
   return (
     <div className={style["left-nav"]}>
       <Menu
@@ -64,8 +65,9 @@ const Index: React.FC = () => {
         theme="dark"
         className={style["left-nav-menu"]}
         onClick={handleClick}
+        items={menuListArr}
       >
-        {createMenu(menuList.gv)}
+        {/* {createMenu(menuList.gv)} */}
       </Menu>
     </div>
   )

@@ -7,6 +7,7 @@
 
 ### 坑1 
 /*使用typescript开发react时候引入 *.module.less有所不同*/
+配置了typescript-plugin-css-modules 以及 vscode 类名自动提示
 
 ### 坑2
 declare module '*.module.less' {
@@ -41,3 +42,12 @@ const loginState = useSelector<RootState, loginType>(state => state.login)
 
 ::-webkit-scrollbar
 ::-webkit-scrollbar-thumb
+
+### 坑8 设置时间选择器需要结合moment.js来处理
+form.setFieldsValue({ ...record, updated_at: moment(record.updated_at) })
+
+
+### 坑9 当我使用setFileldsValue时 Switch组建通过checked控制的状态而不是value 这时我们可以通过valuePropName这个属性绑定到Form.Item上来解决
+
+
+### 坑10 Partial可选 Required必选 Pick与Omit也是正好相反，一个是选择其中属性，另一个是剔除其中属性。
