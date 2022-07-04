@@ -6,9 +6,10 @@ import { cultivateEdit } from "../../api/member"
 
 export default function Index() {
   const navigate = useNavigate()
-  const { state } = useLocation()
-  const formSubmit = async value => {
-    const result = await cultivateEdit(state.id, value)
+  const { state }: { state: any } = useLocation()
+  console.log(state, "state")
+  const formSubmit = async (value: any) => {
+    const result: any = await cultivateEdit(state.id, value)
     if (result?.code === 0) {
       message.success("编辑成功", 2)
       setTimeout(() => {
@@ -54,7 +55,7 @@ export default function Index() {
         <Form.Item label="注册资金（万元）" name="register_funds">
           <InputNumber
             placeholder="请输入注册资金"
-            addonbefore={<UserOutlined />}
+            // addonbefore={<UserOutlined />}
             style={{ width: "100%" }}
             min={1}
           />

@@ -1,4 +1,9 @@
-import React, { useState, useEffect, useRef } from "react"
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  type MutableRefObject
+} from "react"
 import { Card, Input, Button, Select, Form, Modal, message, Space } from "antd"
 import Table from "../../components/TableNoSelection"
 import useColumns from "./columns"
@@ -16,18 +21,23 @@ const { confirm } = Modal
 
 export default function Cultivate() {
   const [list, setList] = useState([])
-  const [condition, setCondition] = useState({})
+  const [condition, setCondition] = useState<{
+    name?: string
+    page?: number
+    pageSize?: number
+    status?: string
+  }>({})
   const [loading, setLoading] = useState(true)
   const [total, setTotal] = useState(0)
   const [form] = Form.useForm()
-  const reasonRef = useRef()
+  const reasonRef: any = useRef(null)
 
   useEffect(() => {
     getList()
   }, [])
 
   const getList = async (param = {}) => {
-    const result = await getCultivate(param)
+    const result: any = await getCultivate(param)
     const { data, code } = result
     if (code === 0) {
       setList(data.data)
@@ -37,7 +47,7 @@ export default function Cultivate() {
   }
 
   // 关键词搜索查询
-  const search = value => {
+  const search = (value: string) => {
     setCondition({ ...condition, name: value })
     getList({ ...condition, name: value })
   }
@@ -50,41 +60,43 @@ export default function Cultivate() {
   }
 
   // 下拉框选中事件
-  const changeSelect = value => {
+  const changeSelect = (value: string) => {
+    console.log(value, "value")
+
     setCondition({ ...condition, status: value })
     getList({ ...condition, status: value })
   }
 
   // 设置每页分页的条数
-  const getPageSize = (page, size) => {
+  const getPageSize = (page: number, size: number) => {
     setCondition({ ...condition, page, pageSize: size })
     getList({ ...condition, page, pageSize: size })
   }
 
   // 审核拒绝理由
-  const getReason = e => {
+  const getReason = (e: any) => {
     reasonRef.current = e.target.value
   }
 
   // 通过审核
-  const showPassConfirm = record => {
+  const showPassConfirm = (record: any) => {
     confirm({
       title: "培训机构审核确认通过?",
       icon: <ExclamationCircleOutlined />,
       okText: "确定",
       cancelText: "取消",
       onOk: async () => {
-        const result = await cultivateVerify(record.id, { status: 2 })
+        const result: any = await cultivateVerify(record.id, { status: 2 })
         if (result?.code === 0) {
           message.success("审核已通过", 2)
           setTimeout(() => {
-            const newDatas = list.map(item => {
+            const newDatas = list.map((item: any) => {
               if (item.id === record.id) {
                 item.status = 2
               }
               return item
             })
-            setList(newDatas)
+            setList(newDatas as any)
           }, 1000)
         }
       },
@@ -95,7 +107,7 @@ export default function Cultivate() {
   }
 
   // 审核拒绝
-  const showRefuseConfirm = record => {
+  const showRefuseConfirm = (record: any) => {
     confirm({
       title: "培训机构审核确认不通过?",
       icon: <ExclamationCircleOutlined />,
@@ -111,7 +123,7 @@ export default function Cultivate() {
       okText: "确定",
       cancelText: "取消",
       onOk: async () => {
-        let reasonTxt = reasonRef.current.resizableTextArea.props.value
+        const reasonTxt = reasonRef.current.resizableTextArea.props.value
         if (reasonTxt.length === 0) {
           message.error("请输入拒绝理由", 1)
           return new Promise((_, reject) => {
@@ -119,21 +131,21 @@ export default function Cultivate() {
           })
         }
         // 处理请求接口
-        const result = await cultivateVerify(record.id, {
+        const result: any = await cultivateVerify(record.id, {
           status: 3,
           reason: reasonTxt
         })
         if (result?.code === 0) {
           message.success("审核已拒绝", 2)
           setTimeout(() => {
-            const newDatas = list.map(item => {
+            const newDatas = list.map((item: any) => {
               if (item.id === record.id) {
                 item.status = 3
                 item.reason = reasonTxt
               }
               return item
             })
-            setList(newDatas)
+            setList(newDatas as any)
           }, 1000)
         }
       },
@@ -144,14 +156,14 @@ export default function Cultivate() {
   }
 
   // 重置密码
-  const resetPasswd = record => {
+  const resetPasswd = (record: any) => {
     confirm({
       title: "确认重置密码?",
       icon: <ExclamationCircleOutlined />,
       okText: "确定",
       cancelText: "取消",
       onOk: async () => {
-        const result = await cultivateResetPasswd(record.id)
+        const result: any = await cultivateResetPasswd(record.id)
         if (result?.code === 0) {
           message.success("密码重置成功", 2)
         }

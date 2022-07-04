@@ -4,7 +4,7 @@ const menuList = {
   gv: [
     {
       label: "模板示例",
-      key: "member",
+      key: "compress",
       icon: "icon-yonghu",
       path: "compress"
     },

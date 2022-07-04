@@ -1,7 +1,6 @@
 // import { useTranslation } from "react-i18next"
-import { Space, Button, Tooltip } from "antd"
+import { Space, Button } from "antd"
 import type { ColumnsType } from "antd/lib/table"
-import { Link } from "react-router-dom"
 
 interface IDataSource {
   id: number

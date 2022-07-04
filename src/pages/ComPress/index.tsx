@@ -3,7 +3,7 @@ import Table from "@/components/Table"
 import EditRecord from "@/components/EditForm"
 import useColumns from "./columns"
 import { getCultivate } from "@/api/member"
-import { Modal, Form, Input, DatePicker } from "antd"
+import { Modal, Form } from "antd"
 import moment from "moment"
 
 const { confirm } = Modal
@@ -64,7 +64,8 @@ const Index: React.FC = () => {
         moment("2022-10-3", "YYYY-MM-DD HH:mm:ss"),
         moment("2022-11-20", "YYYY-MM-DD HH:mm:ss")
       ],
-      selected: [2]
+      selected: [2],
+      status: record.status == 1 ? true : false
     })
   }
 
@@ -81,8 +82,8 @@ const Index: React.FC = () => {
         { label: "三", value: 3 }
       ],
       config: {
-        showSearch: true,
         mode: "multiple",
+        showSearch: true,
         optionFilterProp: "children"
       }
     },
@@ -111,12 +112,13 @@ const Index: React.FC = () => {
         title="Basic Modal"
         width={600}
         visible={visible}
+        maskClosable={false}
         onOk={() => {
           console.log(form.getFieldsValue())
         }}
         onCancel={() => {
-          setVisible(false)
           form.resetFields()
+          setVisible(false)
         }}
       >
         <EditRecord formConfigArray={formConfigArray} form={form}></EditRecord>

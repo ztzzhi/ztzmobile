@@ -1,5 +1,14 @@
 import React, { useState } from "react"
-import { Form, Input, DatePicker, InputNumber, Switch, Select } from "antd"
+import {
+  Form,
+  Input,
+  DatePicker,
+  InputNumber,
+  Switch,
+  Select,
+  Row,
+  Col
+} from "antd"
 
 const { RangePicker } = DatePicker
 
@@ -72,12 +81,13 @@ export default function TableComponent(props: Iprops) {
         break
     }
   }
+  // sm={24} md={24} lg={12} xl={8} xxl={6}
   return (
     <Form
       form={props.form}
       labelAlign="right"
-      labelCol={{ md: 6 }}
-      wrapperCol={{ md: 14 }}
+      labelCol={{ sm: 24, md: 24, lg: 6, xl: 6, xxl: 6 }}
+      wrapperCol={{ sm: 24, md: 24, lg: 14, xl: 14, xxl: 14 }}
     >
       {props.formConfigArray &&
         props.formConfigArray.map((item, index) => {

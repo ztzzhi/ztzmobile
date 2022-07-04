@@ -51,3 +51,8 @@ form.setFieldsValue({ ...record, updated_at: moment(record.updated_at) })
 
 
 ### 坑10 Partial可选 Required必选 Pick与Omit也是正好相反，一个是选择其中属性，另一个是剔除其中属性。
+
+
+### 坑11 select下拉框带搜索功能时 注意optionFilterProp这个属性
+showSearch: true,
+optionFilterProp: "children"
