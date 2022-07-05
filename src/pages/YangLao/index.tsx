@@ -95,17 +95,17 @@ const Index: React.FC = () => {
               </Form.Item>
             </Col>
             <Col sm={24} md={24} lg={12} xl={8} xxl={6}>
-              <Form.Item label="Username" name="username2">
+              <Form.Item label="Username12123123" name="username2">
                 <Input allowClear />
               </Form.Item>
             </Col>
             <Col sm={24} md={24} lg={12} xl={8} xxl={6}>
-              <Form.Item label="Username" name="username3">
+              <Form.Item label="Username1231231" name="username3">
                 <Input allowClear />
               </Form.Item>
             </Col>
             <Col sm={24} md={24} lg={12} xl={8} xxl={6}>
-              <Form.Item label="Username" name="username4">
+              <Form.Item label="Username1" name="username4">
                 <Input allowClear />
               </Form.Item>
             </Col>

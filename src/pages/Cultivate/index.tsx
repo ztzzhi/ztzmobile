@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  type MutableRefObject
-} from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Card, Input, Button, Select, Form, Modal, message, Space } from "antd"
 import Table from "../../components/TableNoSelection"
 import useColumns from "./columns"

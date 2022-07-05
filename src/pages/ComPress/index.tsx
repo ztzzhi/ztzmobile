@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react"
 import Table from "@/components/Table"
-import EditRecord from "@/components/EditForm"
+import EditForm from "@/components/EditForm"
+import SearchForm from "@/components/SearchForm"
 import useColumns from "./columns"
 import { getCultivate } from "@/api/member"
-import { Modal, Form } from "antd"
+import { formSearchArray, formEditArray } from "./formConfig"
+import { Modal, Form, Card } from "antd"
 import moment from "moment"
 
 const { confirm } = Modal
@@ -13,6 +15,7 @@ interface IApi {
 }
 
 const Index: React.FC = () => {
+  const [formSearch] = Form.useForm()
   const [form] = Form.useForm()
   const [loading, setLoading] = useState(true)
   const [total, setTotal] = useState(0)
@@ -55,6 +58,10 @@ const Index: React.FC = () => {
       title: "重置登录密码"
     })
   }
+
+  const getFieldsSearchValue = (val: any) => {
+    console.log(val)
+  }
   const handleEdit = (record: any) => {
     setVisible(true)
     form.setFieldsValue({
@@ -69,60 +76,49 @@ const Index: React.FC = () => {
     })
   }
 
-  const formConfigArray = [
-    { name: "name", label: "名称", type: "Input" },
-    { name: "phone", label: "电话号码", type: "InputNumber" },
-    {
-      name: "selected",
-      label: "下拉框示例",
-      type: "Select",
-      option: [
-        { label: "一", value: 1 },
-        { label: "二", value: 2 },
-        { label: "三", value: 3 }
-      ],
-      config: {
-        mode: "multiple",
-        showSearch: true,
-        optionFilterProp: "children"
-      }
-    },
-    { name: "created_at", label: "创建时间", type: "DatePicker" },
-    { name: "beignAndEnd", label: "时间段", type: "RangePicker" },
-    { name: "status", label: "状态", type: "Switch", valuePropName: "checked" }
-  ]
-
   return (
     <div>
-      <Table
-        dataSource={list}
-        columns={useColumns({
-          showPassConfirm,
-          showRefuseConfirm,
-          resetPasswd,
-          handleEdit
-        })}
-        total={total}
-        page={initParams.page}
-        loading={loading}
-        selectRows={selectRows}
-        pageSizeChange={pageSizeChange}
-      ></Table>
-      <Modal
-        title="Basic Modal"
-        width={600}
-        visible={visible}
-        maskClosable={false}
-        onOk={() => {
-          console.log(form.getFieldsValue())
-        }}
-        onCancel={() => {
-          form.resetFields()
-          setVisible(false)
-        }}
+      <Card
+        title={
+          <div>
+            <SearchForm
+              formConfigArray={formSearchArray}
+              form={formSearch}
+              getFieldsValue={getFieldsSearchValue}
+            ></SearchForm>
+          </div>
+        }
       >
-        <EditRecord formConfigArray={formConfigArray} form={form}></EditRecord>
-      </Modal>
+        <Table
+          dataSource={list}
+          columns={useColumns({
+            showPassConfirm,
+            showRefuseConfirm,
+            resetPasswd,
+            handleEdit
+          })}
+          total={total}
+          page={initParams.page}
+          loading={loading}
+          selectRows={selectRows}
+          pageSizeChange={pageSizeChange}
+        ></Table>
+        <Modal
+          title="编辑功能展示"
+          width={600}
+          visible={visible}
+          maskClosable={false}
+          onOk={() => {
+            console.log(form.getFieldsValue())
+          }}
+          onCancel={() => {
+            form.resetFields()
+            setVisible(false)
+          }}
+        >
+          <EditForm formConfigArray={formEditArray} form={form}></EditForm>
+        </Modal>
+      </Card>
     </div>
   )
 }
