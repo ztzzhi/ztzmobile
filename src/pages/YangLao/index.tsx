@@ -1,15 +1,5 @@
 import React from "react"
-import {
-  Card,
-  Form,
-  Input,
-  Col,
-  Row,
-  Button,
-  Table,
-  Tooltip,
-  Space
-} from "antd"
+import { Card, Form, Input, Col, Row, Button, Table } from "antd"
 
 import useColumns from "./columns"
 
@@ -139,7 +129,7 @@ const Index: React.FC = () => {
         pagination={{
           total: 50,
           showSizeChanger: true,
-          showTotal: total => `共 ${50} 条`,
+          showTotal: (total: any) => `共 ${total} 条`,
           pageSizeOptions: [10, 15, 20, 30],
           current: 1,
           onChange: onShowChange

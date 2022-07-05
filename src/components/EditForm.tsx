@@ -1,14 +1,4 @@
-import React, { useState } from "react"
-import {
-  Form,
-  Input,
-  DatePicker,
-  InputNumber,
-  Switch,
-  Select,
-  Row,
-  Col
-} from "antd"
+import { Form, Input, DatePicker, InputNumber, Switch, Select } from "antd"
 
 const { RangePicker } = DatePicker
 
