@@ -56,3 +56,13 @@ form.setFieldsValue({ ...record, updated_at: moment(record.updated_at) })
 ### 坑11 select下拉框带搜索功能时 注意optionFilterProp这个属性
 showSearch: true,
 optionFilterProp: "children"
+
+
+### 坑12 preserveSelectedRowKeys控制Table选择是否保留上页面已选内容
+
+
+### Descriptions 不会自动换行
+.ant-descriptions-item{
+      word-break: break-all;
+    white-space: pre-wrap;
+}

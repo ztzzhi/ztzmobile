@@ -1,0 +1,17 @@
+stages:
+  - install
+  - build
+  - deploy
+  - clean
+
+job 0:
+  stage: install
+  script: echo 'intall'
+
+job 1:
+  stage: build
+  script: echo 'build'
+  
+job 2:
+  stage: deploy
+  script: echo 'deploy'
