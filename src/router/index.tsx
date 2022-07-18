@@ -11,6 +11,7 @@ import Cultivate from "@/pages/Cultivate"
 import CultivateEdit from "@/pages/Cultivate/edit"
 import YangLao from "@/pages/YangLao/index"
 import ComPress from "@/pages/ComPress/index"
+import Bar from "@/pages/bar/index"
 
 // 页面路由
 
@@ -27,12 +28,13 @@ export default function AppRouter() {
         { path: "compress", element: <ComPress /> }
       ]
     },
+    { path: "/bar", element: <Bar /> },
     {
-      path: "login",
+      path: "/login",
       element: <Login />
     },
-    { path: "404", element: <NotFound /> },
-    { path: "401", element: <NotPermission /> },
+    { path: "/404", element: <NotFound /> },
+    { path: "/401", element: <NotPermission /> },
     { path: "*", element: <NotFound /> }
   ])
   return routers

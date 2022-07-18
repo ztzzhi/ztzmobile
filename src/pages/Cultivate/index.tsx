@@ -1,5 +1,16 @@
 import React, { useState, useEffect, useRef } from "react"
-import { Card, Input, Button, Select, Form, Modal, message, Space } from "antd"
+import {
+  Card,
+  Input,
+  Button,
+  Select,
+  Form,
+  Modal,
+  message,
+  Space,
+  Row,
+  Col
+} from "antd"
 import Table from "../../components/TableNoSelection"
 import useColumns from "./columns"
 
@@ -173,32 +184,39 @@ export default function Cultivate() {
     <Card
       title={
         <Form form={form} layout="inline">
-          <Form.Item label="培训机构" name="agency_name">
-            <Search
-              placeholder="请输入培训机构名称"
-              allowClear
-              style={{ width: 200 }}
-              onSearch={search}
-            />
-          </Form.Item>
-          <Form.Item label="审核状态" name="state">
-            <Select
-              style={{ width: 150 }}
-              onChange={changeSelect}
-              placeholder="选择审核状态"
-              allowClear
-            >
-              <Option value="1">待审核</Option>
-              <Option value="2">审核通过</Option>
-              <Option value="3">审核不通过</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item style={{ marginLeft: "10%" }}>
-            <Button type="primary" onClick={reset}>
-              重置
-            </Button>
-          </Form.Item>
+          <Row gutter={[20, 15]}>
+            <Col>
+              <Form.Item label="培训机构" name="agency_name">
+                <Search
+                  placeholder="请输入培训机构名称"
+                  allowClear
+                  onSearch={search}
+                  style={{ width: 200 }}
+                />
+              </Form.Item>
+            </Col>
+            <Col>
+              <Form.Item label="审核状态" name="state">
+                <Select
+                  onChange={changeSelect}
+                  placeholder="选择审核状态"
+                  allowClear
+                  style={{ width: 180 }}
+                >
+                  <Option value="1">待审核</Option>
+                  <Option value="2">审核通过</Option>
+                  <Option value="3">审核不通过</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col>
+              <Form.Item style={{ marginLeft: "10%" }}>
+                <Button type="primary" onClick={reset}>
+                  重置
+                </Button>
+              </Form.Item>
+            </Col>
+          </Row>
         </Form>
       }
     >

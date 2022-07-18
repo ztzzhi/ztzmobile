@@ -67,40 +67,27 @@ const Index: React.FC = () => {
         >
           <Row gutter={[20, 15]}>
             <Col sm={24} md={24} lg={12} xl={8} xxl={6}>
-              <Form.Item
-                label="Username"
-                name="username1"
-                rules={[
-                  {
-                    validator: (_, value) => {
-                      if (value === "1") {
-                        return Promise.resolve()
-                      }
-                      return Promise.reject("aaaa")
-                    }
-                  }
-                ]}
-              >
+              <Form.Item label="培训机构" name="username1">
                 <Input allowClear />
               </Form.Item>
             </Col>
             <Col sm={24} md={24} lg={12} xl={8} xxl={6}>
-              <Form.Item label="Username12123123" name="username2">
+              <Form.Item label="客户经理" name="username2">
                 <Input allowClear />
               </Form.Item>
             </Col>
             <Col sm={24} md={24} lg={12} xl={8} xxl={6}>
-              <Form.Item label="Username1231231" name="username3">
+              <Form.Item label="培训机构名称" name="username3">
                 <Input allowClear />
               </Form.Item>
             </Col>
             <Col sm={24} md={24} lg={12} xl={8} xxl={6}>
-              <Form.Item label="Username1" name="username4">
+              <Form.Item label="努涅" name="username4">
                 <Input allowClear />
               </Form.Item>
             </Col>
             <Col sm={24} md={24} lg={12} xl={8} xxl={6}>
-              <Form.Item label="Username" name="username5">
+              <Form.Item label="查询" name="username5">
                 <Input allowClear />
               </Form.Item>
             </Col>
