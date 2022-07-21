@@ -9,13 +9,9 @@ import style from "./index.module.less"
 const Index: React.FC = () => {
   const [mylist, setmylist] = useState<any>([])
   const getList = (list = []) => {
-    axios
-      .get(
-        "https://www.fastmock.site/mock/e691a0e4c13d795a0ad56c0ad6f279d7/api/user"
-      )
-      .then((res: any) => {
-        setmylist([...list, ...res.data.data])
-      })
+    axios.get("https://api.github.com/users").then((res: any) => {
+      setmylist([...list, ...res.data])
+    })
   }
   useEffect(() => {
     getList()
@@ -54,16 +50,18 @@ const Index: React.FC = () => {
         >
           {mylist.map((it: any, index: any) => {
             return (
-              <div className={style.chatContainer}>
+              <div key={index} className={style.chatContainer}>
                 <div className={style.chatLeft}>
-                  <img src="http://dummyimage.com/336x280" alt="" />
+                  <img src={it.avatar_url} alt="" />
                 </div>
                 <div className={style.chatRight}>
                   <div className={style.chartRightTop}>
-                    <div className={style.nameClass}>{it.name}</div>
-                    <div className={style.timeClass}>{it.newTime}</div>
+                    <div className={style.nameClass}>{it.login}</div>
+                    <div className={style.timeClass}>
+                      {it.newTime || "07-19"}
+                    </div>
                   </div>
-                  <div className={style.chartRightContent}>{it.content}</div>
+                  <div className={style.chartRightContent}>{it.node_id}</div>
                 </div>
               </div>
             )
