@@ -2,7 +2,7 @@ import React, { useState } from "react"
 
 import { useSelector, useDispatch } from "react-redux"
 import { changeTokenAction } from "../../store/actions/login"
-import { Button } from "antd"
+import { Button } from "react-vant"
 import { RootState } from "@/store"
 import { loginType } from "@/store/reducers/login"
 //@ts-ignore

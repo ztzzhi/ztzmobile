@@ -15,23 +15,31 @@ module.exports = {
             options: {
                 lessLoaderOptions: {
                     lessOptions: {
-                        modifyVars: { "@primary-color": "#1492FF" },
+                        modifyVars: {
+
+                        },
                         javascriptEnabled: true
                     }
                 }
             }
-        }
+        },
     ],
-    babel: {
-        plugins: [
-            [
-                "import",
-                {
-                    libraryName: "antd",
-                    libraryDirectory: "es",
-                    style: true
-                }
-            ]
-        ]
-    }
+    style: {
+        postcss: {
+            mode: "extends",
+            loaderOptions: {
+                postcssOptions: {
+                    ident: "postcss",
+                    plugins: [
+                        [
+                            "postcss-px-to-viewport-8-plugin",
+                            {
+                                viewportWidth: 750, // 设计稿的视口宽度
+                            },
+                        ],
+                    ],
+                },
+            },
+        },
+    },
 }

@@ -12,3 +12,5 @@ fis-conf.js
 /src/reportWebVitals.ts
 /.eslintrc.js
 /craco.config.js
+/babel.config.js
+/postcss.config.js

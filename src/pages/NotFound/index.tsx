@@ -3,7 +3,7 @@ import Image from "./404_error.png"
 //@ts-ignore
 import style from "./index.module.less"
 import { useNavigate } from "react-router-dom"
-import { Button } from "antd"
+import { Button } from "react-vant"
 
 export default function Index() {
   const navigate = useNavigate()
@@ -19,13 +19,7 @@ export default function Index() {
           </div>
           <h2 className={style.title}>PAGE NOT FOUND</h2>
           <h3 className={style.desc}>WE COULDN’T FIND THIS PAGE</h3>
-          <Button
-            className={style.backBtn}
-            size="large"
-            type="dashed"
-            ghost
-            onClick={handleGoBack}
-          >
+          <Button className={style.backBtn} size="large" onClick={handleGoBack}>
             返回上一页
           </Button>
         </div>

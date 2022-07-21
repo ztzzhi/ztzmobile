@@ -1,0 +1,61 @@
+.main {
+  font-size: 20px;
+
+  .btn {
+    width: 375px;
+  }
+}
+
+.container {
+  padding: 15px;
+
+  .chatContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    .chatLeft {
+      width: 130px;
+      height: 130px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+
+    .chatRight {
+      width: calc(100% - 130px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding-left: 20px;
+
+      .chartRightTop {
+        line-height: 70px;
+        display: flex;
+        justify-content: space-between;
+
+        .nameClass {
+          font-size: 26px;
+          font-weight: 600;
+        }
+
+        .timeClass {
+          color: #999;
+        }
+      }
+
+      .chartRightContent {
+        line-height: 50px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #666;
+      }
+    }
+  }
+}

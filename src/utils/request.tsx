@@ -2,7 +2,7 @@
  * axios全局配置
  */
 import axios from "axios"
-import { message } from "antd"
+// import { message } from "react-vant"
 import store from "../store"
 import qs from "qs"
 
@@ -35,9 +35,9 @@ instance.interceptors.response.use(response => {
   if (response.data.code === 0) {
     return response.data
   } else if (response.data.code === 40003) {
-    message.warning(`${response.data.message}，请重新登录`, 2)
+    // message.warning(`${response.data.message}，请重新登录`, 2)
   } else {
-    message.error(`${response.data.message}`, 2)
+    // message.error(`${response.data.message}`, 2)
     return
   }
 })

@@ -1,9 +1,9 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store"
-import { ConfigProvider } from "antd"
-import enUS from "antd/lib/locale/en_US"
-import zhCN from "antd/lib/locale/zh_CN"
+import { ConfigProvider } from "react-vant"
+import enUS from "react-vant/es/locale/lang/en-US"
+import zhCN from "react-vant/es/locale/lang/zh-CN"
 
 const Index: any = ({ children }: any) => {
   const language = useSelector<RootState, string>(state => state.i18n.language)

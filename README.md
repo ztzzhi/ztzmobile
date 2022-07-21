@@ -69,3 +69,8 @@ optionFilterProp: "children"
 
 
 ### scp 本地文件 root@180.76.xxx.x:/usr/share 发声本地文件到服务器/usr/share目录下
+
+
+### 移动端H5 防止Ios出现横向滚动条     
+  overflow: hidden;
+  overflow-y: auto;
