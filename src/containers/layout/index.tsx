@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom"
 import { TabBarArr } from "./constant"
 //@ts-ignore
 import style from "./index.module.less"
+
 const Index: React.FC = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()

@@ -6,6 +6,7 @@ import { HeaderTabsArr } from "./constant"
 import { Find } from "./find"
 import { Attention } from "./attention"
 import { City } from "./city"
+
 const Index: React.FC = () => {
   const renderContent = (index: number) => {
     switch (index) {

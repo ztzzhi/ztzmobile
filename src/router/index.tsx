@@ -7,6 +7,7 @@ import Home from "@/pages/Home/index"
 import Shop from "@/pages/Shop/index"
 import Notice from "@/pages/Notice/index"
 import Mine from "@/pages/Mine/index"
+import Chat from "@/pages/Chat/index"
 import NotFound from "../pages/NotFound"
 import NotPermission from "../pages/NotPermission"
 
@@ -40,6 +41,10 @@ export default function AppRouter() {
     {
       path: "/login",
       element: <Login />
+    },
+    {
+      path: "/chat:id",
+      element: <Chat />
     },
     { path: "/404", element: <NotFound /> },
     { path: "/401", element: <NotPermission /> },

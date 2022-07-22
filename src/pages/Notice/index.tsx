@@ -1,12 +1,14 @@
 import axios from "axios"
 import React, { useState, useEffect } from "react"
 import InfiniteScroll from "react-infinite-scroll-component"
+import { useNavigate } from "react-router-dom"
 import { Toast, NavBar, Popover, Button } from "react-vant"
 import { iconActions } from "./constant"
 //@ts-ignore
 import style from "./index.module.less"
 
 const Index: React.FC = () => {
+  const navigator = useNavigate()
   const [mylist, setmylist] = useState<any>([])
   const getList = (list = []) => {
     axios.get("https://api.github.com/users").then((res: any) => {
@@ -19,6 +21,9 @@ const Index: React.FC = () => {
 
   const requestList = () => {
     return getList(mylist)
+  }
+  const GoToChat = (item: any) => {
+    navigator(`/chat_${item.node_id}`, { state: item })
   }
   return (
     <div className={style.main}>
@@ -50,7 +55,11 @@ const Index: React.FC = () => {
         >
           {mylist.map((it: any, index: any) => {
             return (
-              <div key={index} className={style.chatContainer}>
+              <div
+                key={index}
+                className={style.chatContainer}
+                onClick={() => GoToChat(it)}
+              >
                 <div className={style.chatLeft}>
                   <img src={it.avatar_url} alt="" />
                 </div>
