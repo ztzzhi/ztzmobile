@@ -22,7 +22,6 @@ instance.interceptors.request.use(
       //如果token存在，就设置到请求头中
       config.headers!.Authorization = `Bearer ${token}`
     }
-    config.url = "/proxy" + config.url
     return config
   },
   error => {
@@ -32,10 +31,8 @@ instance.interceptors.request.use(
 
 //配置响应拦截器
 instance.interceptors.response.use(response => {
-  if (response.data.code === 0) {
+  if (response.data.code === 200) {
     return response.data
-  } else if (response.data.code === 40003) {
-    // message.warning(`${response.data.message}，请重新登录`, 2)
   } else {
     // message.error(`${response.data.message}`, 2)
     return

@@ -32,12 +32,13 @@ import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { changeUserInfoAction } from "../../store/actions/user"
 
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Navigate } from "react-router-dom"
 //@ts-ignore
 import style from "./index.module.less"
 import { Field, Button, Toast } from "react-vant"
 import { EyeO, ClosedEye } from "@react-vant/icons"
 export default function Login() {
+  Toast.setDefaultOptions({ duration: 142000 })
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -113,36 +114,41 @@ export default function Login() {
       ""
     )
 
-  return (
-    <div id={style.login}>
-      <main>
-        <h1>欢迎</h1>
+  const userinfo = window.sessionStorage.getItem("userinfo")
+  if (userinfo) {
+    return <Navigate to="/"></Navigate>
+  } else {
+    return (
+      <div id={style.login}>
+        <main>
+          <h1>欢迎</h1>
 
-        <div className={style.tel}>
-          手机号码
-          <Field
-            className={style.telinp}
-            placeholder="请输入您的手机号"
-            value={tel}
-            onChange={setTel}
-          />
-        </div>
-        <div className={style.tel + " " + style.password}>
-          登录密码
-          <Field
-            className={style.telinp}
-            type={isRicon ? "text" : "password"}
-            rightIcon={passRicon}
-            placeholder="请输入您的登录密码"
-            value={password}
-            onChange={setPasswrod}
-          />
-        </div>
+          <div className={style.tel}>
+            手机号码
+            <Field
+              className={style.telinp}
+              placeholder="请输入您的手机号"
+              value={tel}
+              onChange={setTel}
+            />
+          </div>
+          <div className={style.tel + " " + style.password}>
+            登录密码
+            <Field
+              className={style.telinp}
+              type={isRicon ? "text" : "password"}
+              rightIcon={passRicon}
+              placeholder="请输入您的登录密码"
+              value={password}
+              onChange={setPasswrod}
+            />
+          </div>
 
-        <Button onClick={Login} size="large" round color="#018FAD">
-          登录
-        </Button>
-      </main>
-    </div>
-  )
+          <Button onClick={Login} size="large" round color="#018FAD">
+            登录
+          </Button>
+        </main>
+      </div>
+    )
+  }
 }
