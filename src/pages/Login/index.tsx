@@ -38,7 +38,6 @@ import style from "./index.module.less"
 import { Field, Button, Toast } from "react-vant"
 import { EyeO, ClosedEye } from "@react-vant/icons"
 export default function Login() {
-  Toast.setDefaultOptions({ duration: 142000 })
   const dispatch = useDispatch()
   const navigate = useNavigate()
 

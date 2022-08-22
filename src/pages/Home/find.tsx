@@ -14,10 +14,16 @@ export const Find: React.FC = () => {
   const [visible, setVisible] = useState(true)
   const [mylist, setmylist] = useState<IUserData[]>([])
   const [macy, SetMacy] = useState<any>()
-  const requestList = () => {
-    return getList(mylist)
+  const debounce = (fn: any, time: number) => {
+    let timeout: any = null
+    return function () {
+      clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        fn()
+      }, time)
+    }
   }
-
+  const requestList = debounce(() => getList(mylist), 700)
   const getList = (list: IUserData[] = []) => {
     setVisible(true)
     axios
@@ -45,6 +51,7 @@ export const Find: React.FC = () => {
         new Macy({
           container: "#macy-container", // 图像列表容器
           trueOrder: false,
+          mobileFirst: true,
           waitForImages: false,
           margin: { x: 10, y: 10 },
           columns: 2 // 设置列数
