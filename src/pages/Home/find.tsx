@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 //@ts-ignore
 import style from "./index.module.less"
-import { Tabs, Toast, List } from "react-vant"
-import { TabsKindsArr, UserData, IUserData } from "./constant"
+import { Tabs, List } from "react-vant"
+import { TabsKindsArr, IUserData } from "./constant"
 import { LikeO } from "@react-vant/icons"
-import InfiniteScroll from "react-infinite-scroll-component"
 import Macy from "macy"
 import axios from "axios"
 import MyLoading from "@/components/Loading"
@@ -12,11 +11,17 @@ import MyLoading from "@/components/Loading"
 export const Find: React.FC = () => {
   const [active, SetActive] = useState("TJ")
   const [visible, setVisible] = useState(false)
-  const [mylist, setmylist] = useState<IUserData[]>([])
+  const [mylist, setmylist] = useState<any>([])
   const [macy, SetMacy] = useState<any>(null)
+  const [page, setPage] = useState(0)
+
+  useEffect(() => {
+    InitMacy()
+  }, [mylist])
+
   const debounce = (fn: any, time: number) => {
     let timeout: any = null
-    return function () {
+    return () => {
       clearTimeout(timeout)
       timeout = setTimeout(() => {
         fn()
@@ -24,21 +29,24 @@ export const Find: React.FC = () => {
     }
   }
 
-  const requestList = debounce(() => {
-    getList(mylist)
-  }, 500)
-
-  const getList = (list: IUserData[] = []) => {
+  const getList = () => {
     if (visible) return
     setVisible(true)
-    axios
-      .get(
-        "https://www.fastmock.site/mock/e691a0e4c13d795a0ad56c0ad6f279d7/api/api/list"
-      )
-      .then(res => {
-        setmylist([...list, ...res.data.data])
-        setVisible(false)
-      })
+    setPage((currentPage: any) => {
+      axios
+        .get(
+          `https://1.117.155.84:7001/v1/news/newslist?type=it&page=${
+            currentPage + 1
+          }&num=${30}`
+        )
+        .then(res => {
+          setmylist((list: any) => {
+            return [...list, ...res.data.result]
+          })
+          setVisible(false)
+        })
+      return currentPage + 1
+    })
   }
   useEffect(() => {
     getList()
@@ -54,7 +62,7 @@ export const Find: React.FC = () => {
     if (!macy) {
       SetMacy(
         new Macy({
-          container: "#macy-container", // 图像列表容器
+          container: "#macy-container",
           trueOrder: false,
           mobileFirst: true,
           waitForImages: false,
@@ -65,13 +73,10 @@ export const Find: React.FC = () => {
     } else {
       macy.runOnImageLoad(function () {
         macy.reInit()
-      })
+      }, true)
+      // runOnImageLoad 这个方法 第二个参数为true 表示图片每一张加载都会执行 这样就不会有排版的的闪烁问题
     }
   }
-
-  useEffect(() => {
-    InitMacy()
-  }, [mylist])
 
   return (
     <>
@@ -88,50 +93,47 @@ export const Find: React.FC = () => {
           ></Tabs.TabPane>
         ))}
       </Tabs>
-      {/* <InfiniteScroll
-        dataLength={mylist.length}
-        next={requestList}
-        hasMore={true}
-        endMessage={
-          <p style={{ textAlign: "center" }}>
-            <b>没有更多了～</b>
-          </p>
-        }
-        loader={<h4 style={{ textAlign: "center" }}>Loading...</h4>}
-      >
-        
-      </InfiniteScroll> */}
       <div className={style.mainList}>
         <List
-          onLoad={requestList}
+          onLoad={debounce(() => {
+            getList()
+          }, 500)}
           finished={false}
           finishedText={"没有更多了～"}
           offset={200}
         >
           <div id="macy-container">
-            {macy &&
-              mylist.map((it, index) => {
-                return (
-                  <div key={index} className={style.item}>
-                    <img src={it.imgSrc} alt="" />
-                    <div className={style.footer}>
-                      <div>
-                        <span className={style.spanclass}>{it.content}</span>
+            {mylist.map((it: any, index: any) => {
+              return (
+                <div
+                  key={index}
+                  className={style.item}
+                  onClick={() => window.open(it.url)}
+                >
+                  <img src={it.picUrl} alt="" />
+                  <div className={style.footer}>
+                    <div>
+                      <span className={style.spanclass}>{it.title}</span>
+                    </div>
+                    <div className={style.footerMainBom}>
+                      <div className={style.footerLeft}>
+                        <img
+                          src={
+                            "https://img2.baidu.com/it/u=3719952796,4013830643&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+                          }
+                          alt=""
+                        />
+                        <span style={{ marginLeft: "5px" }}>{it.source}</span>
                       </div>
-                      <div className={style.footerMainBom}>
-                        <div className={style.footerLeft}>
-                          <img src={it.userSrc} alt="" />
-                          <span style={{ marginLeft: "5px" }}>{it.name}</span>
-                        </div>
-                        <div className={style.footerRight}>
-                          <LikeO className={style.heart} />
-                          <span>{it.num}</span>
-                        </div>
+                      <div className={style.footerRight}>
+                        <LikeO className={style.heart} />
+                        <span>{it.num || 999}</span>
                       </div>
                     </div>
                   </div>
-                )
-              })}
+                </div>
+              )
+            })}
           </div>
         </List>
       </div>
