@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 //@ts-ignore
 import style from "./index.module.less"
-import { Tabs, Toast } from "react-vant"
+import { Tabs, Toast, List } from "react-vant"
 import { TabsKindsArr, UserData, IUserData } from "./constant"
 import { LikeO } from "@react-vant/icons"
 import InfiniteScroll from "react-infinite-scroll-component"
@@ -11,9 +11,9 @@ import MyLoading from "@/components/Loading"
 
 export const Find: React.FC = () => {
   const [active, SetActive] = useState("TJ")
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(false)
   const [mylist, setmylist] = useState<IUserData[]>([])
-  const [macy, SetMacy] = useState<any>()
+  const [macy, SetMacy] = useState<any>(null)
   const debounce = (fn: any, time: number) => {
     let timeout: any = null
     return function () {
@@ -23,8 +23,13 @@ export const Find: React.FC = () => {
       }, time)
     }
   }
-  const requestList = debounce(() => getList(mylist), 700)
+
+  const requestList = debounce(() => {
+    getList(mylist)
+  }, 500)
+
   const getList = (list: IUserData[] = []) => {
+    if (visible) return
     setVisible(true)
     axios
       .get(
@@ -66,7 +71,7 @@ export const Find: React.FC = () => {
 
   useEffect(() => {
     InitMacy()
-  })
+  }, [mylist])
 
   return (
     <>
@@ -83,7 +88,7 @@ export const Find: React.FC = () => {
           ></Tabs.TabPane>
         ))}
       </Tabs>
-      <InfiniteScroll
+      {/* <InfiniteScroll
         dataLength={mylist.length}
         next={requestList}
         hasMore={true}
@@ -94,31 +99,42 @@ export const Find: React.FC = () => {
         }
         loader={<h4 style={{ textAlign: "center" }}>Loading...</h4>}
       >
-        <div id="macy-container">
-          {mylist.map((it, index) => {
-            return (
-              <div key={index} className={style.item}>
-                <img src={it.imgSrc} alt="" />
-                <div className={style.footer}>
-                  <div>
-                    <span className={style.spanclass}>{it.content}</span>
-                  </div>
-                  <div className={style.footerMainBom}>
-                    <div className={style.footerLeft}>
-                      <img src={it.userSrc} alt="" />
-                      <span style={{ marginLeft: "5px" }}>{it.name}</span>
+        
+      </InfiniteScroll> */}
+      <div className={style.mainList}>
+        <List
+          onLoad={requestList}
+          finished={false}
+          finishedText={"没有更多了～"}
+          offset={200}
+        >
+          <div id="macy-container">
+            {macy &&
+              mylist.map((it, index) => {
+                return (
+                  <div key={index} className={style.item}>
+                    <img src={it.imgSrc} alt="" />
+                    <div className={style.footer}>
+                      <div>
+                        <span className={style.spanclass}>{it.content}</span>
+                      </div>
+                      <div className={style.footerMainBom}>
+                        <div className={style.footerLeft}>
+                          <img src={it.userSrc} alt="" />
+                          <span style={{ marginLeft: "5px" }}>{it.name}</span>
+                        </div>
+                        <div className={style.footerRight}>
+                          <LikeO className={style.heart} />
+                          <span>{it.num}</span>
+                        </div>
+                      </div>
                     </div>
-                    <div className={style.footerRight}>
-                      <LikeO className={style.heart} />
-                      <span>{it.num}</span>
-                    </div>
                   </div>
-                </div>
-              </div>
-            )
-          })}
-        </div>
-      </InfiniteScroll>
+                )
+              })}
+          </div>
+        </List>
+      </div>
       <MyLoading visible={visible}></MyLoading>
     </>
   )

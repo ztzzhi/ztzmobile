@@ -1,8 +1,13 @@
 .main {
   font-size: 20px;
+  height: 100%;
 
   .HeaderTabs {
+    height: 100%;
+
     .TabsForHeader {
+      height: 100% !important;
+
       :global {
         .rv-tab--active {
           color: #000;
@@ -20,7 +25,10 @@
         .rv-tabs__content {
           margin-top: 0px;
           padding: 20px;
+          height: calc(100% - 110px);
         }
+
+        .rv-tabs__content
       }
     }
 
@@ -122,4 +130,19 @@
 
 #macy-container {
   width: 100%;
+}
+
+
+.mainList {
+  height: calc(100% - 54px);
+  overflow-y: scroll;
+  scrollbar-width: none;
+  /* firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+  overflow: -moz-scrollbars-none;
+}
+
+.mainList::-webkit-scrollbar {
+  width: 0 !important
 }

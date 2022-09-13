@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter } from "react-router-dom"
+import { BrowserRouter, HashRouter } from "react-router-dom"
 import AppRouter from "./router"
 import "./App.less"
 import "@/assets/css/reset.css"
@@ -7,9 +7,9 @@ import "@/assets/css/global.less"
 function App() {
   return (
     <div className="mainContainer">
-      <BrowserRouter>
+      <HashRouter>
         <AppRouter />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   )
 }

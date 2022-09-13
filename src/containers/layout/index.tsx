@@ -19,7 +19,7 @@ const Index: React.FC = () => {
     return <Navigate to="/login"></Navigate>
   } else {
     return (
-      <div>
+      <div className={style.containerAllMy}>
         <div className={style.mainContainer}>
           <Outlet></Outlet>
         </div>
