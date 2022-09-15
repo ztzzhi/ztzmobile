@@ -35,7 +35,7 @@ export const Find: React.FC = () => {
     setPage((currentPage: any) => {
       axios
         .get(
-          `https://1.117.155.84:7001/v1/news/newslist?type=it&page=${
+          `https://www.myutils.cn:7001/v1/news/newslist?type=it&page=${
             currentPage + 1
           }&num=${30}`
         )

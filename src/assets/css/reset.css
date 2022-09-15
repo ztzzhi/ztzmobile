@@ -95,3 +95,8 @@ th {
   border-radius: 5px;
   background-color: #929EAD;
 }
+
+html,
+body {
+  overflow-x: hidden !important;
+}
