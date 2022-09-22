@@ -7,10 +7,13 @@ import { LikeO } from "@react-vant/icons"
 import Macy from "macy"
 import axios from "axios"
 import MyLoading from "@/components/Loading"
+import Mask from "@/components/Mask"
 
 export const Find: React.FC = () => {
   const [active, SetActive] = useState("TJ")
   const [visible, setVisible] = useState(false)
+  const [visible123, setVisible123] = useState(false)
+  const [visibleObj, setVisibleObj] = useState({})
   const [mylist, setmylist] = useState<any>([])
   const [macy, SetMacy] = useState<any>(null)
   const [page, setPage] = useState(0)
@@ -35,7 +38,7 @@ export const Find: React.FC = () => {
     setPage((currentPage: any) => {
       axios
         .get(
-          `https://www.myutils.cn:7001/v1/news/newslist?type=it&page=${
+          `https://www.myutils.cn:7001/v1/news/newslist?type=esports&page=${
             currentPage + 1
           }&num=${30}`
         )
@@ -78,6 +81,10 @@ export const Find: React.FC = () => {
     }
   }
 
+  const myClick = (value: boolean) => {
+    setVisible123(value)
+  }
+
   return (
     <>
       <Tabs
@@ -93,7 +100,10 @@ export const Find: React.FC = () => {
           ></Tabs.TabPane>
         ))}
       </Tabs>
-      <div className={style.mainList}>
+      <div
+        className={style.mainList}
+        style={{ filter: visible123 ? "blur(5px)" : "" }}
+      >
         <List
           onLoad={debounce(() => {
             getList()
@@ -108,7 +118,13 @@ export const Find: React.FC = () => {
                 <div
                   key={index}
                   className={style.item}
-                  onClick={() => window.open(it.url)}
+                  onClick={() => {
+                    setVisible123(true)
+                    setVisibleObj(it)
+                    // setTimeout(() => {
+                    //   setVisible123(false)
+                    // }, 2000)
+                  }}
                 >
                   <img src={it.picUrl} alt="" />
                   <div className={style.footer}>
@@ -138,6 +154,11 @@ export const Find: React.FC = () => {
         </List>
       </div>
       <MyLoading visible={visible}></MyLoading>
+      <Mask
+        visible={visible123}
+        visibleObj={visibleObj}
+        myClick={myClick}
+      ></Mask>
     </>
   )
 }

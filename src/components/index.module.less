@@ -1,0 +1,102 @@
+.outContainer {
+  background-color: rgba(255, 255, 255, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+}
+
+.innerContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  width: 50%;
+  background-color: #fff;
+  box-shadow: inset rgba(0, 0, 0, 0.24) 0px 2px 8px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.item img {
+  width: 100%;
+  height: 100%;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.spanclass {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  // font-size: 26px;
+}
+
+.footerMainBom {
+  width: 100%;
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.footer .footerLeft {
+  // font-size: 26px;
+  display: flex;
+  align-items: center;
+}
+
+.footer .footerRight {
+  // font-size: 26px;
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+
+.footer .heart {
+  width: 40px;
+  height: 40px;
+}
+
+
+#macy-container {
+  width: 100%;
+  position: relative;
+}
+
+
+.mainList {
+  height: calc(100% - 54px);
+  overflow: hidden;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  /* firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+  overflow: -moz-scrollbars-none;
+  position: relative;
+}
+
+.mainList::-webkit-scrollbar {
+  width: 0 !important
+}

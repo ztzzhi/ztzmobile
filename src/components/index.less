@@ -1,0 +1,44 @@
+.bosstext-enter {
+  transition: all 1s;
+}
+
+.bosstext-enter-active {
+  animation: hahah 1s;
+}
+
+.bosstext-exit {
+  transition: all 1s; // 不加退出时没有过渡容易出问题!!!
+}
+
+.bosstext-exit-active {
+  animation: wode 1s;
+}
+
+
+@keyframes hahah {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: .5;
+    transform: scale(1.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    rotate: 360deg;
+  }
+}
+
+@keyframes wode {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0) translate(100%) skew(45deg, 45deg);
+  }
+}
