@@ -23,7 +23,16 @@ const Index: React.FC = () => {
         <div className={style.mainContainer}>
           <Outlet></Outlet>
         </div>
-        <Tabbar defaultValue={defaultValue} onChange={handleTabBarChange}>
+        <Tabbar
+          style={{
+            maxWidth: "375px",
+            margin: "0 auto",
+            left: "50%",
+            transform: "translateX(-50%)"
+          }}
+          defaultValue={defaultValue}
+          onChange={handleTabBarChange}
+        >
           {TabBarArr.map((item, index) => {
             return (
               <Tabbar.Item key={index} icon={item.icon} badge={item.config}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 //@ts-ignore
 import style from "./index.module.less"
 import { Tabs, List } from "react-vant"
@@ -17,17 +17,32 @@ export const Find: React.FC = () => {
   const [mylist, setmylist] = useState<any>([])
   const [macy, SetMacy] = useState<any>(null)
   const [page, setPage] = useState(0)
+  const listref = useRef<any>(null)
 
   useEffect(() => {
     InitMacy()
   }, [mylist])
 
+  useEffect(() => {
+    getList()
+    const checkLoad = (e: any) => {
+      const scrollTop = e.target.scrollTop
+      const windowHeight = e.target.clientHeight
+      const scrollHeight = e.target.scrollHeight
+      if (scrollTop + windowHeight + 300 >= scrollHeight) {
+        getList()
+      }
+    }
+    window.addEventListener("scroll", debounce(checkLoad, 500), true)
+    return window.removeEventListener("scroll", checkLoad)
+  }, [])
+
   const debounce = (fn: any, time: number) => {
     let timeout: any = null
-    return () => {
+    return (...set: any) => {
       clearTimeout(timeout)
       timeout = setTimeout(() => {
-        fn()
+        fn(...set)
       }, time)
     }
   }
@@ -38,7 +53,7 @@ export const Find: React.FC = () => {
     setPage((currentPage: any) => {
       axios
         .get(
-          `https://www.myutils.cn:7001/v1/news/newslist?type=esports&page=${
+          `https://www.myutils.cn:7001/v1/news/newslist?type=woman&page=${
             currentPage + 1
           }&num=${30}`
         )
@@ -51,10 +66,6 @@ export const Find: React.FC = () => {
       return currentPage + 1
     })
   }
-  useEffect(() => {
-    getList()
-  }, [])
-
   const handleTabsChange = (key: any) => {
     SetActive(key)
     getList()
@@ -104,14 +115,7 @@ export const Find: React.FC = () => {
         className={style.mainList}
         style={{ filter: visible123 ? "blur(5px)" : "" }}
       >
-        <List
-          onLoad={debounce(() => {
-            getList()
-          }, 500)}
-          finished={false}
-          finishedText={"没有更多了～"}
-          offset={200}
-        >
+        <List finished={false} finishedText={"没有更多了～"}>
           <div id="macy-container">
             {mylist.map((it: any, index: any) => {
               return (
