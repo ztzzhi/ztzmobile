@@ -25,19 +25,11 @@ export const Find: React.FC = () => {
 
   useEffect(() => {
     getList()
-    const checkLoad = (e: any) => {
-      const scrollTop = e.target.scrollTop
-      const windowHeight = e.target.clientHeight
-      const scrollHeight = e.target.scrollHeight
-      if (scrollTop + windowHeight + 300 >= scrollHeight) {
-        getList()
-      }
-    }
-    window.addEventListener("scroll", debounce(checkLoad, 500), true)
-    return window.removeEventListener("scroll", checkLoad)
   }, [])
 
   const debounce = (fn: any, time: number) => {
+    console.log(123)
+
     let timeout: any = null
     return (...set: any) => {
       clearTimeout(timeout)
@@ -53,7 +45,7 @@ export const Find: React.FC = () => {
     setPage((currentPage: any) => {
       axios
         .get(
-          `https://www.myutils.cn:7001/v1/news/newslist?type=woman&page=${
+          `https://www.myutils.cn:7001/v1/news/newslist?type=topnews&page=${
             currentPage + 1
           }&num=${30}`
         )
@@ -115,7 +107,11 @@ export const Find: React.FC = () => {
         className={style.mainList}
         style={{ filter: visible123 ? "blur(5px)" : "" }}
       >
-        <List finished={false} finishedText={"没有更多了～"}>
+        <List
+          finished={false}
+          finishedText={"没有更多了～"}
+          onLoad={debounce(getList, 500)}
+        >
           <div id="macy-container">
             {mylist.map((it: any, index: any) => {
               return (
