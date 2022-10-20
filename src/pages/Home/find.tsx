@@ -45,7 +45,7 @@ export const Find: React.FC = () => {
     setPage((currentPage: any) => {
       axios
         .get(
-          `https://www.myutils.cn:7001/v1/news/newslist?type=topnews&page=${
+          `https://www.myutils.cn:7001/v1/news/newslist?type=it&page=${
             currentPage + 1
           }&num=${30}`
         )
@@ -104,13 +104,14 @@ export const Find: React.FC = () => {
         ))}
       </Tabs>
       <div
-        className={style.mainList}
+        className={`${style.mainList}`}
         style={{ filter: visible123 ? "blur(5px)" : "" }}
       >
         <List
           finished={false}
           finishedText={"没有更多了～"}
           onLoad={debounce(getList, 500)}
+          className={style.mylist}
         >
           <div id="macy-container">
             {mylist.map((it: any, index: any) => {

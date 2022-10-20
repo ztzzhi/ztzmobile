@@ -1,5 +1,5 @@
 .main {
-  font-size: 20px;
+  font-size: 1rem;
   height: 100%;
 
   .HeaderTabs {
@@ -19,7 +19,7 @@
 
         .rv-tabs__wrap {
           border-bottom: 1px solid #eee;
-          padding: 10px 0;
+          padding: 0.5rem 0;
         }
       }
     }
@@ -49,16 +49,16 @@
 
         // .rv-tabs__content {
         //   margin-top: 0px;
-        //   padding: 10px;
+        //   padding: 0.5rem;
         // }
       }
     }
   }
 
   .item {
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
     box-shadow: inset rgba(0, 0, 0, 0.24) 0px 2px 8px;
-    border-radius: 10px;
+    border-radius: 0.5rem;
     overflow: hidden;
   }
 
@@ -71,7 +71,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 10px;
+    padding: 0.5rem;
     font-size: 14px;
   }
 
@@ -86,15 +86,15 @@
 
   .footerMainBom {
     width: 100%;
-    padding-top: 15px;
+    padding-top: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .footer img {
-    width: 40px;
-    height: 40px;
+    width: 1.5rem;
+    height: 1.5rem;
     border-radius: 50%;
   }
 
@@ -112,8 +112,8 @@
   }
 
   .footer .heart {
-    width: 40px;
-    height: 40px;
+    width: 1rem;
+    height: 1rem;
   }
 
 
@@ -127,7 +127,6 @@
 
 
 .mainList {
-  height: calc(100vh - 100px);
   overflow: hidden;
   overflow-y: scroll;
   scrollbar-width: none;
@@ -136,8 +135,17 @@
   /* IE 10+ */
   overflow: -moz-scrollbars-none;
   position: relative;
+  margin: 0 0.5rem;
+}
+
+.mainList.keep-px-bottom {
+  // padding-bottom: 170px;
 }
 
 .mainList::-webkit-scrollbar {
   width: 0 !important
+}
+
+.mylist {
+  padding-bottom: 0px;
 }
