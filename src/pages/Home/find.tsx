@@ -17,7 +17,6 @@ export const Find: React.FC = () => {
   const [mylist, setmylist] = useState<any>([])
   const [macy, SetMacy] = useState<any>(null)
   const [page, setPage] = useState(0)
-  const listref = useRef<any>(null)
 
   useEffect(() => {
     InitMacy()
@@ -45,7 +44,7 @@ export const Find: React.FC = () => {
     setPage((currentPage: any) => {
       axios
         .get(
-          `https://www.myutils.cn:7001/v1/news/newslist?type=it&page=${
+          `https://www.myutils.cn:7001/v1/news/newslist?type=&page=${
             currentPage + 1
           }&num=${30}`
         )
